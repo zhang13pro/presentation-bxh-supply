@@ -44,10 +44,43 @@ Webpack to Vite
 - css-loader
 - ...
 
+<v-click>
+
+```js {monaco}
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: "url-loader",
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"],
+      },
+    ],
+  },
+```
+
+</v-click>
+
+---
+
 Vite ⚡️
 
 - ESModule
 - rollup
+
+<v-click>
+
+```js {monaco}
+import ...
+```
+
+</v-click>
 
 ---
 
@@ -119,7 +152,7 @@ createApp(app)
 
 <v-click>
 
-Element-plus
+Element-plus OR Ant-design-Vue
 
 </v-click>
 

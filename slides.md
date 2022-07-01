@@ -5,14 +5,14 @@ class: 'text-center'
 highlighter: shiki
 lineNumbers: false
 info: |
-  Presentation with the Skill use-in JavaScript.
+  供应商服务拆分
 drawings:
   persist: false
 ---
 
-# JavaScript Skill
+# Supply Server Split
 
-Presentation with the Skill use-in JavaScript
+供应商服务拆分
 
 @[zhang13pro](https://github.com/zhang13pro)
 
@@ -36,15 +36,142 @@ Presentation with the Skill use-in JavaScript
 
 ---
 
-# String Skill
+## 构建工具 🔧
 
-```ts {monaco}
-type StrOrNum = string | number
+Webpack to Vite
 
-const ThousandNum = (num: number): StrOrNum => {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-}
-console.log(ThousandNum(20190214))
+- sass-loader
+- css-loader
+- ...
+
+Vite ⚡️
+
+- ESModule
+- rollup
+
+---
+
+## 生态
+
+```bash
+下午4:59:53 [vite] warning:
+/Users/h/w/supplier-op/src/router/filter.js
+1  |  export default function (view) {
+2  |      return (resovle) => import(
+3  |          `@/views/${view}.vue`
+   |          ^
+4  |        ).then(resovle)
+5  |  }
+The above dynamic import cannot be analyzed by vite.
+See https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations for supported dynamic import formats. If this is intended to be left as-is, you can use the /* @vite-ignore */ comment inside the import() call to suppress this warning.
+
+  Plugin: vite:import-analysis
+  File: /Users/h/w/supplier-op/src/router/filter.jsg
+下午5:02:39 [vite]
+下午5:02:48 [vite] page reload src/plugins/index.js
 ```
 
-<!-- <iframe width="560" height="600" src="https://www.typescriptlang.org/play" /> -->
+---
+
+## 规范
+
+[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "placement"
+
+---
+
+## 升级 Vue3
+
+`Object.defineProperty` to `Proxy`
+
+`Vue` to `createApp`
+
+<v-click>
+
+```js {monaco}
+new Vue({
+  data: {
+    /* options */
+  },
+})
+```
+
+</v-click>
+
+<v-click>
+
+```js {monaco}
+createApp(app)
+```
+
+</v-click>
+
+<!-- 原型 -->
+
+---
+
+## Bug 🐛
+
+<v-click>
+
+Element-plus
+
+</v-click>
+
+<v-click>
+
+新的 icons 解决方案
+
+</v-click>
+
+<v-click>
+
+~~新的 CSS 组织方式~~
+
+```html {monaco}
+<div w-screen h-screen flex justify-center items-center></div>
+<div class="container panel-center item-center"></div>
+```
+
+</v-click>
+
+---
+
+Nginx
+
+```bash {monaco}
+server {
+    listen 80;
+    server_name supply.op.baoxiaohe.fun;
+    index index.html;
+    location / {
+        root /home/baoxiaohe/sites/bxh-supplier;
+    }
+
+	  location ^~ /api/v2/ {
+	      include snippets/proxy.conf;
+		    proxy_pass http://bxh-apiv2-dev2/;
+	  }
+
+	  location /admin/ {
+		    include snippets/proxy.conf;
+		    # proxy_pass http://bxh-admin-release/;
+		    proxy_pass http://127.0.0.1:7003/;
+	  }
+    access_log /var/log/nginx/supply.baoxiaohe-access.log;
+    error_log /var/log/nginx/supply.baoxiaohe-error.log;
+}
+```
+
+---
+
+Log
+
+```bash
+2022/06/30 14:58:18 [error] 3690692#3690692: *475376 connect() failed (111: Connection refused) while connecting to upstream,
+client: 122.233.188.207,
+server: supply.baoxiaohe.fun,
+request: "GET /admin/captcha_code HTTP/1.1",
+upstream: "http://127.0.0.1:7003/captcha_code",
+host: "supply.baoxiaohe.fun",
+referrer: "http://supply.baoxiaohe.fun/"
+```

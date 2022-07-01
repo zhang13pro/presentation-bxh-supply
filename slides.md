@@ -51,7 +51,7 @@ Vite ⚡️
 
 ---
 
-## 生态
+## Changes
 
 ```bash
 下午4:59:53 [vite] warning:
@@ -73,9 +73,9 @@ See https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#l
 
 ---
 
-## 规范
+## Bug 🐛
 
-[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "placement"
+Element Table
 
 ---
 
@@ -109,7 +109,13 @@ createApp(app)
 
 ---
 
-## Bug 🐛
+## 规范
+
+[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "placement"
+
+---
+
+## 生态
 
 <v-click>
 
